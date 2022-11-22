@@ -98,7 +98,7 @@ this.anims.create({
   repeat: -1
 });
 
-this.player = this.physics.add.sprite(300, 500, 'elle')
+this.player = this.physics.add.sprite(707, 419, 'elle')
 // this.witch = this.physics.add.sprite(600, 300, 'witch')
 // this.slime = this.physics.add.sprite(800, 300, 'slime').setScale(0.8)
 window.player = this.player;
