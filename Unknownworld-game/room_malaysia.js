@@ -26,7 +26,7 @@ class room_malaysia extends Phaser.Scene {
   }
 
   create() {
-    console.log("*** world scene");
+    console.log("*** room_malaysia");
 
     //Step 3 - Create the map from main
     //let map = this.make.tilemap({ key: "world1" });
