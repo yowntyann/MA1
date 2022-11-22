@@ -11,13 +11,13 @@ class room_malaysiaBoss extends Phaser.Scene {
     // Step 1, load JSON
     //this.load.tilemapTiledJSON("world1", "assets/Tutorial1.json");
 
-    this.load.tilemapTiledJSON("mybossMap", "assets/malaysiabossMap.tmj") 
+    this.load.tilemapTiledJSON("malaysiabossMap", "assets/malaysiabossMap.tmj") 
 
     // Step 2 : Preload any images here
     //this.load.image("building", "assets/Buildings32x32.png");
     //this.load.image("street", "assets/Street32x32.png");
 
-    this.load.image("bossplants", "assets/plant.png");
+    this.load.image("bossplant", "assets/plant.png");
     this.load.image("pipoya", "assets/pipoya.png");
     this.load.image("tuxmon", "assets/tuxmon-32x32.png");
     this.load.spritesheet('elle', 'assets/elle-sprite.png',
@@ -38,7 +38,9 @@ class room_malaysiaBoss extends Phaser.Scene {
     //let buildingTiles = map.addTilesetImage("Buildings32x32", "building");
     //let streetTiles = map.addTilesetImage("Street32x32", "street");
 
-    let beachTiles = map.addTilesetImage("beach tilesheet", "beach")
+    let plantsTiles = map.addTilesetImage("bossplant", "bossplant")
+    let pipoyaTiles = map.addTilesetImage("pipoya", "pipoya")
+    let tuxmonTiles = map.addTilesetImage("tuxmon", "tuxmon")
 
     // Step 5  create an array of tiles
     // let tilesArray = [
@@ -46,15 +48,15 @@ class room_malaysiaBoss extends Phaser.Scene {
     //   streetTiles,
     // ];
 
-    let tilesArray = [beachTiles, treesTiles, signageTiles, teleportTiles]
+    let tilesArray = [plantsTiles, pipoyaTiles, tuxmonTiles]
 
     // Step 6  Load in layers by layers
     //this.groundLayer = map.createLayer("groundLayer",tilesArray,0,0);
 
-    this.groundLayer = map.createLayer("groundLayer", tilesArray, 0,0);
-    this.treeLayer = map.createLayer("treeLayer", tilesArray, 0,0);
-    this.signLayer = map.createLayer("signLayer", tilesArray, 0,0);
-    this.alphabetLayer = map.createLayer("alphabetLayer", tilesArray, 0,0);
+    this.mybossgroundLayer = map.createLayer("mybossgroundLayer", tilesArray, 0,0);
+    this.mybosswalkLayer = map.createLayer("mybosswalkLayer", tilesArray, 0,0);
+    this.mybossobject2Layer = map.createLayer("mybossobject2Layer", tilesArray, 0,0);
+    this.mybossobjectLayer = map.createLayer("mybossobjectLayer", tilesArray, 0,0);
 
     // Add main player here with physics.add.sprite
 
@@ -88,7 +90,8 @@ this.anims.create({
   repeat: -1
 });
 
-this.player = this.physics.add.sprite(300, 500, 'elle')
+var start = map.findObject("mybossObjectLayer", (obj) => obj.name === "startmyBoss");
+this.player = this.physics.add.sprite(start.x, start.y, 'elle')
 
 
 // this.add.sprite(300, 500, 'elle').play('left-elle');
@@ -112,13 +115,13 @@ this.player = this.physics.add.sprite(300, 500, 'elle')
     // window.player=this.player;
     this.player.body.setSize(this.player.width*0.3, this.player.height*0.8)
 
-    this.physics.world.bounds.width = this.treeLayer.width;
-    this.physics.world.bounds.height = this.treeLayer.height;
+    this.physics.world.bounds.width = this.mybossgroundLayer.width;
+    this.physics.world.bounds.height = this.mybossgroundLayer.height;
 
-    this.treeLayer.setCollisionByExclusion(-1, true) 
-    this.alphabetLayer.setCollisionByExclusion(-1, true) 
-    this.physics.add.collider(this.treeLayer, this.player);
-    this.physics.add.collider(this.alphabetLayer, this.player);
+    this.mybossobjectLayer.setCollisionByExclusion(-1, true) 
+    this.mybossobject2Layer.setCollisionByExclusion(-1, true) 
+    this.physics.add.collider(this.mybossobjectLayer, this.player);
+    this.physics.add.collider(this.mybossobject2Layer, this.player);
 
     this.player.setCollideWorldBounds(true);//don't go out of the this.map
    
@@ -133,6 +136,12 @@ this.player = this.physics.add.sprite(300, 500, 'elle')
   } /////////////////// end of create //////////////////////////////
 
   update() {
+
+    if (this.player.x > 1045 && this.player.x < 1074 && this.player.y < 162 && this.player.y > 149) {
+      console.log("Jump back roomMalaysia")
+      this.roomMalaysia();
+    }
+
     this.cursors = this.input.keyboard.createCursorKeys();
     if (this.cursors.left.isDown)
 {
@@ -156,8 +165,12 @@ else if (this.cursors.down.isDown)
 }
 else
 {
+  this.player.anims.stop();
  this.player.setVelocity(0)
 }
   } /////////////////// end of update //////////////////////////////
-
+  roomMalaysia(player,tile){
+    console.log("roomMalaysia function");
+    this.scene.start("room_malaysia");
+  }
 } //////////// end of class world ////////////////////////

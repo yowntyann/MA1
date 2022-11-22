@@ -15,7 +15,7 @@
     // },
     backgroundColor: '#000000',
     pixelArt: true,
-    scene: [world, room_japan, room_malaysia, room_italy, game]
+    scene: [world, room_japan, room_malaysia, room_malaysiaBoss, room_italy, game]
 };
 
 var game = new Phaser.Game(config);

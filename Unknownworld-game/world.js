@@ -202,7 +202,8 @@ else if (this.cursors.down.isDown)
 }
 else
 {
- this.player.setVelocity(0)
+  this.player.anims.stop();
+  this.player.setVelocity(0)
 }
 
 

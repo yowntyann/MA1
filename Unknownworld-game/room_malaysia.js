@@ -93,6 +93,7 @@ this.anims.create({
 });
 
 var start = map.findObject("myobjectLayer", (obj) => obj.name === "mystart");
+var start1 = map.findObject("mybossObjectLayer", (obj) => obj.name === "exitMalaysiaboss");
 
 this.player = this.physics.add.sprite(start.x, start.y, 'elle')
 window.player = this.player
@@ -146,6 +147,10 @@ window.player = this.player
       this.world();
     }
 
+    if (this.player.x > 1045 && this.player.x < 1074 && this.player.y < 162 && this.player.y > 149) {
+      console.log("Jump to malaysiaBoss")
+      this.roomMalaysiaboss();
+    }
 
     this.cursors = this.input.keyboard.createCursorKeys();
     if (this.cursors.left.isDown)
@@ -170,11 +175,17 @@ else if (this.cursors.down.isDown)
 }
 else
 {
+  this.player.anims.stop();
  this.player.setVelocity(0)
 }
   } /////////////////// end of update //////////////////////////////
   world(player,tile){
     console.log("world function");
     this.scene.start("world");
+  }
+
+  roomMalaysiaboss(player,tile){
+    console.log("roomMalaysiaboss function");
+    this.scene.start("room_malaysiaBoss");
   }
 } //////////// end of class world ////////////////////////

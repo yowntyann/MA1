@@ -177,6 +177,7 @@ else if (this.cursors.down.isDown)
 }
 else
 {
+  this.player.anims.stop();
  this.player.setVelocity(0)
 }
   } /////////////////// end of update //////////////////////////////
