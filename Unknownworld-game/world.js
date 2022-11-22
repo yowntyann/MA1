@@ -105,6 +105,7 @@ window.player = this.player;
 
 var start = map.findObject("objectLayer", (obj) => obj.name === "exitJapan");
 var start = map.findObject("objectLayer", (obj) => obj.name === "exitMalaysia");
+var start = map.findObject("objectLayer", (obj) => obj.name === "exitItaly");
 // this.add.sprite(300, 500, 'elle').play('left-elle');
 // this.add.sprite(400, 500, 'elle').play('front-elle');
 // this.add.sprite(500, 500, 'elle').play('back-elle');
@@ -163,7 +164,7 @@ var start = map.findObject("objectLayer", (obj) => obj.name === "exitMalaysia");
   update() {
 
     
-    if (this.player.x > 946 && this.player.x < 971 && this.player.y < 313 && this.player.y > 262) {
+    if (this.player.x > 953 && this.player.x < 969 && this.player.y < 313 && this.player.y > 262) {
       console.log("Jump to roomJapan")
       this.roomJapan();
     }
@@ -171,6 +172,11 @@ var start = map.findObject("objectLayer", (obj) => obj.name === "exitMalaysia");
     if (this.player.x > 953 && this.player.x < 969 && this.player.y < 430 && this.player.y > 403) {
       console.log("Jump to roomMalaysia")
       this.roomMalaysia();
+    }
+
+    if (this.player.x > 953 && this.player.x < 969 && this.player.y < 553 && this.player.y > 516) {
+      console.log("Jump to roomItaly")
+      this.roomItaly();
     }
 
     this.cursors = this.input.keyboard.createCursorKeys();
@@ -210,6 +216,11 @@ else
   roomMalaysia(player,tile){
     console.log("roomMalaysia function");
     this.scene.start("room_malaysia");
+  }
+
+  roomItaly(player,tile){
+    console.log("roomItaly function");
+    this.scene.start("room_italy");
   }
 
   moveDownUp() {

@@ -17,21 +17,22 @@ class room_italy extends Phaser.Scene {
     //this.load.image("building", "assets/Buildings32x32.png");
     //this.load.image("street", "assets/Street32x32.png");
 
-    this.load.image("beach", "assets/beach_tilesheet.png");
-    this.load.image("trees", "assets/plant.png");
-    this.load.image("signage", "assets/gather_signage_1.2.png");
-    this.load.image("teleport", "assets/teleport-point.png");
+    this.load.image("atlas", "assets/misc_atlas.png");
+    this.load.image("atlas2", "assets/build_atlas.png");
+    this.load.image("magecity", "assets/magecity.png");
+    this.load.image("pipoya", "assets/pipoya.png");
+    this.load.image("teleport-point", "assets/teleport-point.png");
     this.load.spritesheet('elle', 'assets/elle-sprite.png',
         { frameWidth: 64, frameHeight: 64 })
   }
 
   create() {
-    console.log("*** world scene");
+    console.log("*** room_italy");
 
     //Step 3 - Create the map from main
     //let map = this.make.tilemap({ key: "world1" });
 
-    let map = this.make.tilemap({key: "mainMap"})
+    let map = this.make.tilemap({key: "italyMap"})
 
     // Step 4 Load the game tiles
     // 1st parameter is name in Tiled,
@@ -39,10 +40,11 @@ class room_italy extends Phaser.Scene {
     //let buildingTiles = map.addTilesetImage("Buildings32x32", "building");
     //let streetTiles = map.addTilesetImage("Street32x32", "street");
 
-    let beachTiles = map.addTilesetImage("beach tilesheet", "beach");
-    let treesTiles = map.addTilesetImage("plant", "trees")
-    let signageTiles = map.addTilesetImage("gather_signage_1.2", "signage")
-    let teleportTiles = map.addTilesetImage("teleport", "teleport")
+    let atlasTiles = map.addTilesetImage("atlas", "atlas");
+    let atlas2Tiles = map.addTilesetImage("atlas2", "atlas2")
+    let magecityTiles = map.addTilesetImage("magecity", "magecity")
+    let pipoyaTiles = map.addTilesetImage("pipoya", "pipoya")
+    let teleportTiles = map.addTilesetImage("teleport-point", "teleport-point")
 
     // Step 5  create an array of tiles
     // let tilesArray = [
@@ -50,15 +52,15 @@ class room_italy extends Phaser.Scene {
     //   streetTiles,
     // ];
 
-    let tilesArray = [beachTiles, treesTiles, signageTiles, teleportTiles]
+    let tilesArray = [atlasTiles, atlas2Tiles, magecityTiles, pipoyaTiles, teleportTiles]
 
     // Step 6  Load in layers by layers
     //this.groundLayer = map.createLayer("groundLayer",tilesArray,0,0);
 
-    this.groundLayer = map.createLayer("groundLayer", tilesArray, 0,0);
-    this.treeLayer = map.createLayer("treeLayer", tilesArray, 0,0);
-    this.signLayer = map.createLayer("signLayer", tilesArray, 0,0);
-    this.alphabetLayer = map.createLayer("alphabetLayer", tilesArray, 0,0);
+    this.itgroundLayer = map.createLayer("itgroundLayer", tilesArray, 0,0);
+    this.itwalkLayer = map.createLayer("itwalkLayer", tilesArray, 0,0);
+    this.itbuildjectLayer = map.createLayer("itbuildjectLayer", tilesArray, 0,0);
+    this.itbuildject2Layer = map.createLayer("itbuildject2Layer", tilesArray, 0,0);
 
     // Add main player here with physics.add.sprite
 
@@ -92,7 +94,10 @@ this.anims.create({
   repeat: -1
 });
 
-this.player = this.physics.add.sprite(300, 500, 'elle')
+var start = map.findObject("itobjectLayer", (obj) => obj.name === "itstart");
+
+this.player = this.physics.add.sprite(start.x, start.y, 'elle')
+window.player = this.player
 
 
 // this.add.sprite(300, 500, 'elle').play('left-elle');
@@ -116,13 +121,13 @@ this.player = this.physics.add.sprite(300, 500, 'elle')
     // window.player=this.player;
     this.player.body.setSize(this.player.width*0.3, this.player.height*0.8)
 
-    this.physics.world.bounds.width = this.treeLayer.width;
-    this.physics.world.bounds.height = this.treeLayer.height;
+    this.physics.world.bounds.width = this.itgroundLayer.width;
+    this.physics.world.bounds.height = this.itgroundLayer.height;
 
-    this.treeLayer.setCollisionByExclusion(-1, true) 
-    this.alphabetLayer.setCollisionByExclusion(-1, true) 
-    this.physics.add.collider(this.treeLayer, this.player);
-    this.physics.add.collider(this.alphabetLayer, this.player);
+    this.itbuildjectLayer.setCollisionByExclusion(-1, true) 
+    this.itbuildject2Layer.setCollisionByExclusion(-1, true) 
+    this.physics.add.collider(this.itbuildjectLayer, this.player);
+    this.physics.add.collider(this.itbuildject2Layer, this.player);
 
     this.player.setCollideWorldBounds(true);//don't go out of the this.map
    
@@ -137,6 +142,13 @@ this.player = this.physics.add.sprite(300, 500, 'elle')
   } /////////////////// end of create //////////////////////////////
 
   update() {
+
+    if (this.player.x > 569 && this.player.x < 598 && this.player.y < 38 && this.player.y > 25) {
+      console.log("Jump back world")
+      this.world();
+    }
+
+
     this.cursors = this.input.keyboard.createCursorKeys();
     if (this.cursors.left.isDown)
 {
@@ -163,5 +175,8 @@ else
  this.player.setVelocity(0)
 }
   } /////////////////// end of update //////////////////////////////
-
+  world(player,tile){
+    console.log("world function");
+    this.scene.start("world");
+  }
 } //////////// end of class world ////////////////////////

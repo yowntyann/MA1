@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="32" tileheight="32" infinite="0" nextlayerid="7" nextobjectid="1">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="32" tileheight="32" infinite="0" nextlayerid="8" nextobjectid="2">
+ <editorsettings>
+  <export target="malaysiabossMap.tmj" format="json"/>
+ </editorsettings>
  <tileset firstgid="1" name="pipoya" tilewidth="32" tileheight="32" tilecount="1064" columns="8">
   <image source="pipoya.png" width="256" height="4256"/>
  </tileset>
@@ -145,4 +148,9 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
+ <objectgroup id="7" name="mybossObjectLayer">
+  <object id="1" name="startmyBoss" x="478.667" y="945.333">
+   <point/>
+  </object>
+ </objectgroup>
 </map>

@@ -11,27 +11,26 @@ class room_malaysiaBoss extends Phaser.Scene {
     // Step 1, load JSON
     //this.load.tilemapTiledJSON("world1", "assets/Tutorial1.json");
 
-    this.load.tilemapTiledJSON("bossMap", "assets/bossMap.tmj") 
+    this.load.tilemapTiledJSON("mybossMap", "assets/malaysiabossMap.tmj") 
 
     // Step 2 : Preload any images here
     //this.load.image("building", "assets/Buildings32x32.png");
     //this.load.image("street", "assets/Street32x32.png");
 
-    this.load.image("beach", "assets/beach_tilesheet.png");
-    this.load.image("trees", "assets/plant.png");
-    this.load.image("signage", "assets/gather_signage_1.2.png");
-    this.load.image("teleport", "assets/teleport-point.png");
+    this.load.image("bossplants", "assets/plant.png");
+    this.load.image("pipoya", "assets/pipoya.png");
+    this.load.image("tuxmon", "assets/tuxmon-32x32.png");
     this.load.spritesheet('elle', 'assets/elle-sprite.png',
         { frameWidth: 64, frameHeight: 64 })
   }
 
   create() {
-    console.log("*** world scene");
+    console.log("*** room_malaysiaBoss");
 
     //Step 3 - Create the map from main
     //let map = this.make.tilemap({ key: "world1" });
 
-    let map = this.make.tilemap({key: "mainMap"})
+    let map = this.make.tilemap({key: "malaysiabossMap"})
 
     // Step 4 Load the game tiles
     // 1st parameter is name in Tiled,
@@ -39,10 +38,7 @@ class room_malaysiaBoss extends Phaser.Scene {
     //let buildingTiles = map.addTilesetImage("Buildings32x32", "building");
     //let streetTiles = map.addTilesetImage("Street32x32", "street");
 
-    let beachTiles = map.addTilesetImage("beach tilesheet", "beach");
-    let treesTiles = map.addTilesetImage("plant", "trees")
-    let signageTiles = map.addTilesetImage("gather_signage_1.2", "signage")
-    let teleportTiles = map.addTilesetImage("teleport", "teleport")
+    let beachTiles = map.addTilesetImage("beach tilesheet", "beach")
 
     // Step 5  create an array of tiles
     // let tilesArray = [
