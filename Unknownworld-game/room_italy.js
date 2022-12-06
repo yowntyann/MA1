@@ -446,5 +446,8 @@ else
     console.log("pizza overlap player")
     this.pizzaSnd.play();
     pizza.disableBody(true,true);
+
+    window.sushi++;
+    updateInventory.call(this)
   }
 } //////////// end of class world ////////////////////////

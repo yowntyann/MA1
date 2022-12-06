@@ -416,5 +416,8 @@ class room_malaysia extends Phaser.Scene {
     console.log("nasi overlap player")
     this.nasiSnd.play();
     nasi.disableBody(true,true);
+
+    window.sushi++;
+    updateInventory.call(this)
   }
 } //////////// end of class world ////////////////////////
