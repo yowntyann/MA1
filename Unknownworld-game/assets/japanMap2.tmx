@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="45" height="45" tilewidth="32" tileheight="32" infinite="0" nextlayerid="8" nextobjectid="7">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="45" height="45" tilewidth="32" tileheight="32" infinite="0" nextlayerid="9" nextobjectid="27">
  <editorsettings>
   <export target="japanMap2.tmj" format="json"/>
  </editorsettings>
@@ -261,5 +261,18 @@
   <object id="5" name="jpstart" x="220" y="284">
    <point/>
   </object>
+ </objectgroup>
+ <objectgroup id="8" name="jpcollectLayer">
+  <object id="8" name="sushi1" x="141.333" y="406.667"/>
+  <object id="9" name="sushi2" x="300" y="821.333"/>
+  <object id="11" name="sushi3" x="301.333" y="1357.33"/>
+  <object id="12" name="sushi4" x="717.333" y="1350.67"/>
+  <object id="14" name="sushi5" x="1328" y="1376"/>
+  <object id="16" name="sushi 6" x="588" y="412" width="1.33333"/>
+  <object id="17" name="sushi7" x="446.667" y="37.3333"/>
+  <object id="18" name="sushi8" x="1137.33" y="409.333"/>
+  <object id="20" name="sushi9" x="950.667" y="953.333"/>
+  <object id="22" name="sushi10" x="1069.33" y="1381.33"/>
+  <object id="26" name="sushi6" x="593" y="404"/>
  </objectgroup>
 </map>

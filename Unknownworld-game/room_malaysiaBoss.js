@@ -14,106 +14,156 @@ class room_malaysiaBoss extends Phaser.Scene {
     this.load.tilemapTiledJSON("malaysiabossMap", "assets/malaysiabossMap.tmj") 
 
     // Step 2 : Preload any images here
-    //this.load.image("building", "assets/Buildings32x32.png");
-    //this.load.image("street", "assets/Street32x32.png");
 
     this.load.image("bossplant", "assets/plant.png");
     this.load.image("pipoya", "assets/pipoya.png");
     this.load.image("tuxmon", "assets/tuxmon-32x32.png");
     this.load.spritesheet('elle', 'assets/elle-sprite.png',
         { frameWidth: 64, frameHeight: 64 })
+
+    //audio load
+    this.load.audio("bossbgm", "assets/boss-theme.mp3")
+    this.load.audio("collect", "assets/item-collect.mp3")
+    this.load.audio("gamefail", "assets/failure.mp3")
+   
+    //boss load
+    this.load.spritesheet('boss', 'assets/boss-sprite.png',
+    { frameWidth: 64, frameHeight: 64 })
+
+    //collect load
+    this.load.spritesheet('nasi', 'assets/nasi-sprite.png',
+    { frameWidth: 64, frameHeight: 64 })
   }
 
   create() {
     console.log("*** room_malaysiaBoss");
 
-    //Step 3 - Create the map from main
-    //let map = this.make.tilemap({ key: "world1" });
+    // Call to update inventory
+    this.time.addEvent({
+      delay: 500,
+      callback: updateInventory,
+      callbackScope: this,
+      loop: false,
+      });
 
+    this.music = this.sound
+    .add("bossbgm",{
+        loop : true,
+    })
+    .setVolume(0.3);
+    this.bossbgm = this.music;
+    this.music.play();
+
+    this.failSnd = this.sound.add('gamefail').setVolume(0.4)
+    this.hitSnd = this.sound.add('gamefail').setVolume(0.4)
+    this.nasiSnd = this.sound.add('collect').setVolume(0.1)
+
+    //Step 3 - Create the map from main
     let map = this.make.tilemap({key: "malaysiabossMap"})
 
     // Step 4 Load the game tiles
     // 1st parameter is name in Tiled,
     // 2nd parameter is key in Preload
-    //let buildingTiles = map.addTilesetImage("Buildings32x32", "building");
-    //let streetTiles = map.addTilesetImage("Street32x32", "street");
-
     let plantsTiles = map.addTilesetImage("bossplant", "bossplant")
     let pipoyaTiles = map.addTilesetImage("pipoya", "pipoya")
     let tuxmonTiles = map.addTilesetImage("tuxmon", "tuxmon")
 
     // Step 5  create an array of tiles
-    // let tilesArray = [
-    //   buildingTiles,
-    //   streetTiles,
-    // ];
-
     let tilesArray = [plantsTiles, pipoyaTiles, tuxmonTiles]
 
     // Step 6  Load in layers by layers
-    //this.groundLayer = map.createLayer("groundLayer",tilesArray,0,0);
-
     this.mybossgroundLayer = map.createLayer("mybossgroundLayer", tilesArray, 0,0);
     this.mybosswalkLayer = map.createLayer("mybosswalkLayer", tilesArray, 0,0);
     this.mybossobject2Layer = map.createLayer("mybossobject2Layer", tilesArray, 0,0);
     this.mybossobjectLayer = map.createLayer("mybossobjectLayer", tilesArray, 0,0);
 
-    // Add main player here with physics.add.sprite
+    
+    //bossAnims
+    // this.anims.create({
+    // key: 'left-boss',
+    // frames: this.anims.generateFrameNumbers('boss', { start: 0, end: 2 }),
+    // frameRate: 10,
+    // repeat: -1
+    // });
 
-    
-    
     this.anims.create({
-      key: 'left-elle',
-      frames: this.anims.generateFrameNumbers('elle', { start: 0, end: 2 }),
-      frameRate: 10,
-      repeat: -1
-  });
-
-  this.anims.create({
-    key: 'front-elle',
-    frames: this.anims.generateFrameNumbers('elle', { start: 3, end: 5 }),
+    key: 'bossAnims',
+    frames: this.anims.generateFrameNumbers('boss', { start: 3, end: 3 }),
     frameRate: 10,
     repeat: -1
-});
+    });
 
-this.anims.create({
-  key: 'back-elle',
-  frames: this.anims.generateFrameNumbers('elle', { start: 6, end: 8 }),
-  frameRate: 10,
-  repeat: -1
-});
+    //nasiAnim
+    this.anims.create({
+      key:'nasiAnims',
+      frames:this.anims.generateFrameNumbers('nasi', 
+      { start:0, end:1 }),
+      frameRate: 7,
+      repeat: -1
+    })
 
-this.anims.create({
-  key: 'right-elle',
-  frames: this.anims.generateFrameNumbers('elle', { start: 9, end: 11 }),
-  frameRate: 10,
-  repeat: -1
-});
+    //nasiGroup
+    this.nasiGroup=this.physics.add.group()
 
-var start = map.findObject("mybossObjectLayer", (obj) => obj.name === "startmyBoss");
-this.player = this.physics.add.sprite(start.x, start.y, 'elle')
+    var nasi9 = map.findObject("bosscollectLayer",  (obj) => obj.name === "nasi9");
+    this.nasiGroup.create(nasi9.x, nasi9.y,"nasi9").play("nasiAnims");
 
+    var nasi10 = map.findObject("bosscollectLayer",  (obj) => obj.name === "nasi10");
+    this.nasiGroup.create(nasi10.x, nasi10.y,"nasi10").play("nasiAnims");
 
-// this.add.sprite(300, 500, 'elle').play('left-elle');
-// this.add.sprite(400, 500, 'elle').play('front-elle');
-// this.add.sprite(500, 500, 'elle').play('back-elle');
-// this.add.sprite(600, 500, 'elle').play('right-elle');
+    //start point
+    var startmyBoss = map.findObject("mybossObjectLayer", (obj) => obj.name === "startmyBoss");
 
+    //physic add
+    this.player = this.physics.add.sprite(startmyBoss.x, startmyBoss.y, 'elle')
+    this.boss = this.physics.add.sprite(700, 300, 'boss').play("bossAnims").setScale(3)
+    this.boss2 = this.physics.add.sprite(377, 579, 'boss').play("bossAnims").setScale(3)
+    this.boss3 = this.physics.add.sprite(886, 579, 'boss').play("bossAnims").setScale(3)
 
+    window.player = this.player
 
+    //overlap
+    this.physics.add.overlap(
+    this.player,
+    this.nasiGroup, 
+    this.collectNasi,
+    null, 
+    this
+    );
 
-    // Add time event / movement here
+    this.physics.add.overlap(
+      this.player,
+      [this.boss, this.boss2, this.boss3], 
+      bossHit,
+      null, 
+      this
+      );
 
-    // get the tileIndex number in json, +1
-    //mapLayer.setTileIndexCallback(11, this.room1, this);
+    //movement event
+    this.time.addEvent({
+      delay: 1000,
+      callback: this.moveRightLeft,
+      callbackScope: this,
+      loop: false,
+      });
 
-    // Add custom properties in Tiled called "mouintain" as bool
+      this.time.addEvent({
+        delay: 1000,
+        callback: this.moveRightLeft2,
+        callbackScope: this,
+        loop: false,
+        });
 
-    // What will collider witg what layers
-    //this.physics.add.collider(mapLayer, this.player);
+        this.time.addEvent({
+          delay: 2000,
+          callback: this.moveRightLeft3,
+          callbackScope: this,
+          loop: false,
+          });
 
-    // window.player=this.player;
+    // collide
     this.player.body.setSize(this.player.width*0.3, this.player.height*0.8)
+    this.boss.body.setSize(this.player.width*0.3, this.player.height*0.8)
 
     this.physics.world.bounds.width = this.mybossgroundLayer.width;
     this.physics.world.bounds.height = this.mybossgroundLayer.height;
@@ -126,18 +176,17 @@ this.player = this.physics.add.sprite(start.x, start.y, 'elle')
     this.player.setCollideWorldBounds(true);//don't go out of the this.map
    
 
-    // create the arrow keys
-    //this.cursors = this.input.keyboard.createCursorKeys();
-
-    // camera follow player
-    //this.cameras.main.startFollow(this.player);
+    //camera
     this.cameras.main.startFollow(this.player);
-    // this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
+    
+    console.log("showInventory");
+    //start another scene in parallel
+    this.scene.launch("showInventory")
   } /////////////////// end of create //////////////////////////////
 
   update() {
 
-    if (this.player.x > 1045 && this.player.x < 1074 && this.player.y < 162 && this.player.y > 149) {
+    if (this.player.x > 393 && this.player.x < 420 && this.player.y < 893 && this.player.y > 885) {
       console.log("Jump back roomMalaysia")
       this.roomMalaysia();
     }
@@ -172,5 +221,67 @@ else
   roomMalaysia(player,tile){
     console.log("roomMalaysia function");
     this.scene.start("room_malaysia");
+    this.bossbgm.loop = false;
+    this.bossbgm.stop();
+  }
+
+  moveRightLeft() {
+    console.log("moveRightLeft");
+    this.tweens.timeline({
+      targets: this.boss,
+      loop: -1, // loop forever
+      ease: "Linear",
+      duration: 3000,
+      tweens: [
+        {
+          x: 300,
+        },
+        {
+          x: 700,
+        },
+      ],
+    });
+  }
+
+  moveRightLeft2() {
+    console.log("moveRightLeft2");
+    this.tweens.timeline({
+      targets: this.boss2,
+      loop: -1, // loop forever
+      ease: "Linear",
+      duration: 3000,
+      tweens: [
+        {
+          x: 148,
+        },
+        {
+          x: 377,
+        },
+      ],
+    });
+  }
+
+  moveRightLeft3() {
+    console.log("moveRightLeft3");
+    this.tweens.timeline({
+      targets: this.boss3,
+      loop: -1, // loop forever
+      ease: "Linear",
+      duration: 3000,
+      tweens: [
+        {
+          x: 600,
+        },
+        {
+          x: 886,
+        },
+      ],
+    });
+  }
+
+  collectNasi(player,nasi){
+    console.log("nasi overlap player")
+    this.nasiSnd.play();
+    nasi.disableBody(true,true);
   }
 } //////////// end of class world ////////////////////////

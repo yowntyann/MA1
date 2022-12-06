@@ -240,7 +240,7 @@
                  "rotation":0,
                  "visible":true,
                  "width":0,
-                 "x":912.666666666667,
+                 "x":912.667,
                  "y":296
                 }, 
                 {
@@ -252,8 +252,8 @@
                  "rotation":0,
                  "visible":true,
                  "width":0,
-                 "x":910.666666666667,
-                 "y":425.333333333333
+                 "x":910.667,
+                 "y":425.333
                 }, 
                 {
                  "class":"",
@@ -264,8 +264,20 @@
                  "rotation":0,
                  "visible":true,
                  "width":0,
-                 "x":912.666666666667,
+                 "x":912.667,
                  "y":554
+                }, 
+                {
+                 "class":"",
+                 "height":0,
+                 "id":4,
+                 "name":"gameSuccess",
+                 "point":true,
+                 "rotation":0,
+                 "visible":true,
+                 "width":0,
+                 "x":654,
+                 "y":254
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -274,7 +286,7 @@
          "y":0
         }],
  "nextlayerid":8,
- "nextobjectid":4,
+ "nextobjectid":5,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.9.2",

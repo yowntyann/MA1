@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="45" height="45" tilewidth="32" tileheight="32" infinite="0" nextlayerid="7" nextobjectid="4">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="45" height="45" tilewidth="32" tileheight="32" infinite="0" nextlayerid="8" nextobjectid="23">
  <editorsettings>
   <export target="malaysiaMap2.tmj" format="json"/>
  </editorsettings>
@@ -133,7 +133,7 @@
 0,0,0,0,0,0,0,0,0,735,0,0,0,514,9,10,11,121,401,401,132,133,134,135,289,401,114,115,116,117,65,401,114,115,116,117,65,401,402,403,404,405,406,407,408,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,680,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,736,625,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,601,0,0,0,
+0,0,0,0,0,0,0,0,0,736,625,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,681,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,814,815,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -218,6 +218,32 @@
  </objectgroup>
  <objectgroup id="6" name="mybossObjectLayer">
   <object id="3" name="exitMalaysiaboss" x="1056" y="184">
+   <point/>
+  </object>
+ </objectgroup>
+ <objectgroup id="7" name="mycollectLayer">
+  <object id="4" name="nasi1" x="1200" y="244">
+   <point/>
+  </object>
+  <object id="5" name="nasi2" x="529.333" y="436">
+   <point/>
+  </object>
+  <object id="6" name="nasi3" x="270.667" y="109.333">
+   <point/>
+  </object>
+  <object id="8" name="nasi4" x="1421.33" y="564">
+   <point/>
+  </object>
+  <object id="11" name="nasi5" x="1350.67" y="944">
+   <point/>
+  </object>
+  <object id="12" name="nasi6" x="876" y="1260">
+   <point/>
+  </object>
+  <object id="13" name="nasi7" x="496" y="1262.67">
+   <point/>
+  </object>
+  <object id="15" name="nasi8" x="45.3333" y="849.333">
    <point/>
   </object>
  </objectgroup>
