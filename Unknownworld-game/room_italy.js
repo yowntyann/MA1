@@ -447,7 +447,7 @@ else
     this.pizzaSnd.play();
     pizza.disableBody(true,true);
 
-    window.sushi++;
+    window.pizza++;
     updateInventory.call(this)
   }
 } //////////// end of class world ////////////////////////

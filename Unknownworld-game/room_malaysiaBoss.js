@@ -284,7 +284,7 @@ else
     this.nasiSnd.play();
     nasi.disableBody(true,true);
 
-    window.sushi++;
+    window.nasi++;
     updateInventory.call(this)
   }
 } //////////// end of class world ////////////////////////

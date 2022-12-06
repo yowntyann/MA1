@@ -417,7 +417,7 @@ class room_malaysia extends Phaser.Scene {
     this.nasiSnd.play();
     nasi.disableBody(true,true);
 
-    window.sushi++;
+    window.nasi++;
     updateInventory.call(this)
   }
 } //////////// end of class world ////////////////////////
