@@ -164,6 +164,8 @@ class room_malaysiaBoss extends Phaser.Scene {
     // collide
     this.player.body.setSize(this.player.width*0.3, this.player.height*0.8)
     this.boss.body.setSize(this.player.width*0.3, this.player.height*0.8)
+    this.boss2.body.setSize(this.player.width*0.3, this.player.height*0.8)
+    this.boss3.body.setSize(this.player.width*0.3, this.player.height*0.8)
 
     this.physics.world.bounds.width = this.mybossgroundLayer.width;
     this.physics.world.bounds.height = this.mybossgroundLayer.height;
